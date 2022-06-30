@@ -27,40 +27,49 @@ console.log($hash);  //#nike_1  ==> nike : 배열로 구분하여 접근하는 �
 const $hash_txt = $hash.replace("#", "");
 console.log($hash_txt);  //nike_1
 //nike_1  ==(변수.split("특정문자"))==>  ["nike", "1"]
-const $divide_arr = $hash_txt.split("_");
-console.log($divide_arr);  //["nike", "1"]
-const $brand = $divide_arr[0];  //카테고리 정의(nike | adidas | puma)
-const $index = $divide_arr[1];  //각 카테고리별로 데이터의 인덱스번호(0 | 1 | 2 | 3)
 
-//선택자 구성
-const $detailBg = document.querySelector("#cont .ad_img");
-const $detailTitle = document.querySelector("#cont h3");
-const $detailText = document.querySelector("#cont p");
+if($hash_txt){
+    const $divide_arr = $hash_txt.split("_");
+    console.log($divide_arr);  //["nike", "1"]
+    const $brand = $divide_arr[0];  //카테고리 정의(nike | adidas | puma)
+    const $index = $divide_arr[1];  //각 카테고리별로 데이터의 인덱스번호(0 | 1 | 2 | 3)
 
-if($brand == "nike"){
-    $detailBg.style.backgroundImage = `url(./img/${$nike[$index][0]})`;
-    $detailTitle.textContent = $nike[$index][1];
-    $detailText.textContent = $nike[$index][2];
+    //선택자 구성
+    const $detailBg = document.querySelector("#cont .ad_img");
+    const $detailTitle = document.querySelector("#cont h3");
+    const $detailText = document.querySelector("#cont p");
+
+    if($brand == "nike"){
+        $detailBg.style.backgroundImage = `url(./img/${$nike[$index][0]})`;
+        $detailTitle.textContent = $nike[$index][1];
+        $detailText.textContent = $nike[$index][2];
+    }
+
+    if($brand == "adidas"){
+        $detailBg.style.backgroundImage = `url(./img/${$adidas[$index][0]})`;
+        $detailTitle.textContent = $adidas[$index][1];
+        $detailText.textContent = $adidas[$index][2];
+    }
+
+    if($brand == "puma"){
+        $detailBg.style.backgroundImage = `url(./img/${$puma[$index][0]})`;
+        $detailTitle.textContent = $puma[$index][1];
+        $detailText.textContent = $puma[$index][2];
+    }
+
+
+    //하단의 목록보기 클릭시
+    const backBtn = document.querySelector(".history button");
+
+    backBtn.setAttribute("onclick", `location.href="./sub.html#${$brand}"`);
+
+    // backBtn.addEventListener("click", function(){
+    //     //history.forward();  //방문기록상 한단계 앞으로 진행한다.
+    //     //history.back();     //방문기록상 한단계 뒤로 진행한다.
+    //     //history.go(-2);     //방문기록상 두단계 뒤로 진행한다.
+    //     location.href=`./sub.html#${$brand}`;
+    // });
+
+}else{
+    location.href="./";  //index.html로 강제 이동시키기
 }
-
-if($brand == "adidas"){
-    $detailBg.style.backgroundImage = `url(./img/${$adidas[$index][0]})`;
-    $detailTitle.textContent = $adidas[$index][1];
-    $detailText.textContent = $adidas[$index][2];
-}
-
-if($brand == "puma"){
-    $detailBg.style.backgroundImage = `url(./img/${$puma[$index][0]})`;
-    $detailTitle.textContent = $puma[$index][1];
-    $detailText.textContent = $puma[$index][2];
-}
-
-//하단의 목록보기 클릭시
-const backBtn = document.querySelector(".history button");
-
-backBtn.addEventListener("click", function(){
-    //history.forward();  //방문기록상 한단계 앞으로 진행한다.
-    //history.back();     //방문기록상 한단계 뒤로 진행한다.
-    //history.go(-2);     //방문기록상 두단계 뒤로 진행한다.
-    location.href=`./sub.html#${$brand}`;
-});
